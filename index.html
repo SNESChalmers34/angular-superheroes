@@ -1,12 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html ng-app="superHeroApp">
 <head>
-  <meta charset="UTF-8">
-  <title>Superhero Phone Book</title>
+  <meta charset="utf-8">
+  <title>Superhero Phonebook</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script src="app.js"></script>
+</head>
+<body ng-controller="superHeroCtrl as vm">
+  <h1>Superheroes</h1>
+  <p class="picture" ng-if="vm.selectedHero">Image: <img ng-src="{{vm.selectedHero.img}}" alt=""></p>
+
+  <h2>Search</h2>
+  <label>Super Name:</label>
+  <input ng-model="search" type="text">
+  <table>
+    <thead>
+      <tr>
+        <th>Name:</th>
+        <th>Number:</th>
+        <th>Group:</th>
+        <th>Photo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="hero in vm.heroes | filter:search " class="{{hero.group.toLowerCase()}}">
+        <td>{{hero.name}}</td>
+        <td>{{hero.number}}</td>
+        <td> <button ng-click="vm.heroSelect(hero)">image</button> </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
